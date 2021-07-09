@@ -67,11 +67,7 @@ public class World {
 	         } else if (grid[y][x] instanceof Tshape){
 	        	 g.setColor(Color.magenta);
 	        	 g.fillRect(Grid.grid[y][x][0], Grid.grid[y][x][1], Grid.SQUARE, Grid.SQUARE);
-	         } else if (grid[y][x] instanceof Dot){
-	        	 g.setColor(Color.black);
-	        	 g.fillRect(Grid.grid[y][x][0], Grid.grid[y][x][1], Grid.SQUARE, Grid.SQUARE);
 	         }
-	         
 	      }
 	   }
 	}

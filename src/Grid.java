@@ -36,8 +36,6 @@ public class Grid extends Thread implements KeyListener{
     public World w = new World();
     private Square sq; //= new Square(w,0,0);
     private Rectangle rc;
-    private Dot dt; // = new Dot(w,9,9);
-    private Dot[] dots = new Dot[6];
     private Cell mp;
     
    
@@ -136,7 +134,6 @@ public class Grid extends Thread implements KeyListener{
             	y+=SQUARE+1;
             }
             shift();
-            autoRandomMovement();
         	w.displayWorld(g);
         }
 
@@ -181,6 +178,7 @@ public class Grid extends Thread implements KeyListener{
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
+    //KEY BOARD EVENTS
     public void keyPressed(KeyEvent e) {
     	if (e.getKeyCode() == KeyEvent.VK_UP ) { // MOVE UP
 	    	//Up arrow key code
@@ -198,14 +196,6 @@ public class Grid extends Thread implements KeyListener{
 				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
 				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
 	    	}
-	    	//DOT UP
-            if(dotTrue && dt.boundary(w, "up")) {
-            	if(dt.moveY > 0) {
-            		dt.setNull(w);
-            		dt.moveY--;
-            		dt.setPosition(w);;
-            	}
-            }
             
             //MAIN SHAPES MOVE UP
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"up");
@@ -227,16 +217,6 @@ public class Grid extends Thread implements KeyListener{
 				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
 				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
     		}
-    		
-    		
-    		//DOT DOWN
-            if(dotTrue && dt.boundary(w, "down")) {
-            	if(dt.moveY < GRIDHEIGHT-1) {
-            		dt.setNull(w);
-            		dt.moveY++;
-            		dt.setPosition(w);
-            	}
-            }
             
             //MAIN SHAPES MOVE DOWN
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"down");
@@ -260,16 +240,6 @@ public class Grid extends Thread implements KeyListener{
 				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
             }
             
-
-            //DOT RIGHT
-            if(dotTrue && dt.boundary(w, "right")) {
-            	if(dt.moveX < GRIDWIDTH-1) {
-            		dt.setNull(w);
-            		dt.moveX++;
-            		dt.setPosition(w);;
-            	}
-            }
-            
             //MAIN SHAPES MOVE RIGHT
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"right");
             
@@ -290,36 +260,13 @@ public class Grid extends Thread implements KeyListener{
 				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
 				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
         	}
-        	//DOT LEFT
-            if(dotTrue && dt.boundary(w, "left")) {
-            	if(dt.moveX > 0) {
-            		dt.setNull(w);
-            		dt.moveX--;
-            		dt.setPosition(w);;
-            	}
-            }
             
             //MAIN SHAPES MOVE LEFT
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"left");
             
         	graphics.repaint();
         
-        //TOGGLE RECTANGLE MOVEMENTS
-        } else if (e.getKeyCode() == KeyEvent.VK_R ) {
-        	System.out.println("R pressed = toggle square movements");
-        	squareTrue = rectTrue = lShapeATrue = dotTrue = false;
-        	rectTrue = !rectTrue;
-    	//TOGGLE LSHAPE MOVEMENTS
-        } else if (e.getKeyCode() == KeyEvent.VK_L ) {
-        	System.out.println("L pressed = toggle lShape movements");
-        	squareTrue = rectTrue = lShapeATrue = dotTrue = false;
-        	lShapeATrue = !lShapeATrue;
-    	//TOGGLE DOT MOVEMENTS
-        } else if (e.getKeyCode() == KeyEvent.VK_D ) {
-        	System.out.println("D pressed = toggle DOT movements");
-        	squareTrue = rectTrue = lShapeATrue = dotTrue = false;
-        	dotTrue = !dotTrue;
-    	//ROTATE SELECTED SHAPE
+        //ROTATE SELECTED SHAPE
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
         	System.out.println("SPACE pressed = ROTATE SHAPE");
         		mp.rotate(w);
@@ -336,18 +283,6 @@ public class Grid extends Thread implements KeyListener{
     		mp.drop(w);
         	spawnPiece();
         	setPiece = true;
-        	graphics.repaint();
-    	//TOGGLE AUTO SQUARE MOVEMENTS
-        } else if (e.getKeyCode() == KeyEvent.VK_1) {
-        	autoSquare = !autoSquare;
-        	graphics.repaint();
-    	//TOGGLE AUTO RECTANGLE MOVEMENTS
-        } else if (e.getKeyCode() == KeyEvent.VK_2) {
-        	autoRectangle = !autoRectangle;
-        	graphics.repaint();
-    	//TOGGLE AUTO DOT MOVEMENTS
-        } else if (e.getKeyCode() == KeyEvent.VK_3) {
-        	autoDot = !autoDot;
         	graphics.repaint();
         //CLEAR SCREEN
         } else if (e.getKeyCode() == KeyEvent.VK_C) {
@@ -387,20 +322,6 @@ public class Grid extends Thread implements KeyListener{
 	}
 	public void println(Object obj) {
 		System.out.println(obj);
-	}
-	
-	//AUTO RANDOM MOVEMENT MULTISHAPES
-	public void autoRandomMovement() {
-		if(autoSquare || autoRectangle || autoDot) {
-			try {
-    			if(autoRectangle) rc.moveRectangle(w,rc);
-    			if(autoDot) for(Dot d:dots) d.moveDot(w,d);
-    			graphics.repaint();
-    			Thread.sleep(250);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-		}
 	}
 	
 	

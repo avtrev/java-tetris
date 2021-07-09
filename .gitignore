@@ -26,3 +26,8 @@ tmp/
 local.properties
 .loadpath
 .factorypath
+
+###########
+#Project
+###########
+src/Test.java
