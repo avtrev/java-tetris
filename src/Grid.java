@@ -14,12 +14,6 @@ public class Grid extends Thread implements KeyListener{
 	
     public static int[][][]grid = new int[GRIDHEIGHT][GRIDWIDTH][2];
     public boolean[] moveControl = {false,false,false,false};
-   
-    public boolean rectTrue = false;
-    public boolean dotTrue = false;
-    public boolean autoSquare = false;
-    public boolean autoRectangle = false;
-    public boolean autoDot = false;
     
     //main shapes boolean
     public boolean lShapeATrue = false;
@@ -34,15 +28,10 @@ public class Grid extends Thread implements KeyListener{
     public boolean setPiece = false;
     public int lastLine = GRIDHEIGHT-1;
     public World w = new World();
-    private Square sq; //= new Square(w,0,0);
-    private Rectangle rc;
     private Cell mp;
     
-   
-   
-   
+    //constructor
     public Grid() {
-//    	for(int i=0;i<dots.length;i++) dots[i] = new Dot(w);//intialize dots array
     	spawnPiece();
     }
 
@@ -59,10 +48,7 @@ public class Grid extends Thread implements KeyListener{
         	System.out.println(obj);
         }
         
-        
-        
         public void shift() {
-  
 	    	if(setPiece) {
 	        boolean[] rowFull = new boolean[GRIDHEIGHT];
 	        for(int i=0;i<rowFull.length;i++) {
@@ -136,7 +122,6 @@ public class Grid extends Thread implements KeyListener{
             shift();
         	w.displayWorld(g);
         }
-
     }
     
     //SHOW SCORE METHOD & VARIABLES
@@ -146,7 +131,6 @@ public class Grid extends Thread implements KeyListener{
     JLabel scoreLable = new JLabel("Score ");
     JPanel headerPanel = new JPanel();
     public void showScore() {
-    	
     	showScoreTrue = !showScoreTrue;
     	if(showScoreTrue) {
     		Border blackBorder = BorderFactory.createLineBorder(Color.black);
@@ -159,9 +143,7 @@ public class Grid extends Thread implements KeyListener{
     	} else {
     		frame.remove(headerPanel);
     	}
-    	
     	frame.pack();
-    	
     }
     
     MyGraphics graphics = new MyGraphics();
@@ -180,92 +162,34 @@ public class Grid extends Thread implements KeyListener{
     
     //KEY BOARD EVENTS
     public void keyPressed(KeyEvent e) {
-    	if (e.getKeyCode() == KeyEvent.VK_UP ) { // MOVE UP
+    	// MOVE UP
+    	if (e.getKeyCode() == KeyEvent.VK_UP ) { 
 	    	//Up arrow key code
 	    	System.out.println("Up keypressed");
-
-	    	//RECTANGLE UP
-	    	if(rectTrue && Rectangle.moveY > 0 && rc.boundary(w, "up")) {
-	    		w.setAt(Rectangle.moveX, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, null);
-				Rectangle.moveY--;
-				w.setAt(Rectangle.moveX, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
-	    	}
-            
             //MAIN SHAPES MOVE UP
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"up");
-
 	    	graphics.repaint();
-    	} else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { // MOVE DOWN
+	    // MOVE DOWN	
+    	} else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
     		//Down arrow key code
     		System.out.println("Down keypressed");
-
-    		//RECTANGLE DOWN
-    		if(rectTrue && Rectangle.moveY < GRIDHEIGHT - Rectangle.HEIGHT && rc.boundary(w, "down")) {
-    			w.setAt(Rectangle.moveX, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, null);
-				Rectangle.moveY++;
-				w.setAt(Rectangle.moveX, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
-    		}
-            
             //MAIN SHAPES MOVE DOWN
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"down");
-            
     		graphics.repaint();
-    		
-    	} else if (e.getKeyCode() == KeyEvent.VK_RIGHT ) { //MOVE RIGHT
+    	//MOVE LEFT    
+    	} else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { 
+    		//Left arrow key code
+    		System.out.println("Left keypressed");
+    		//MAIN SHAPES MOVE LEFT
+    		if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"left");
+    		graphics.repaint();
+    	//MOVE RIGHT	
+    	} else if (e.getKeyCode() == KeyEvent.VK_RIGHT ) { 
     		//right arrow key code
             System.out.println("Right keypressed");
-
-            //RECTANGLE RIGHT
-            if(rectTrue && Rectangle.moveX < GRIDWIDTH - Rectangle.WIDTH && rc.boundary(w, "right")) {
-            	w.setAt(Rectangle.moveX, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, null);
-				Rectangle.moveX++;
-				w.setAt(Rectangle.moveX, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
-            }
-            
             //MAIN SHAPES MOVE RIGHT
             if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"right");
-            
             graphics.repaint();
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { //MOVE LEFT
-            //Left arrow key code
-        	System.out.println("Left keypressed");
-
-        	//RECTANGLE LEFT
-        	if(rectTrue && Rectangle.moveX > 0 && rc.boundary(w, "left")) {
-        		w.setAt(Rectangle.moveX, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, null);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, null);
-				Rectangle.moveX--;
-				w.setAt(Rectangle.moveX, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+1, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+2, Rectangle.moveY, rc);
-				w.setAt(Rectangle.moveX+3, Rectangle.moveY, rc);
-        	}
-            
-            //MAIN SHAPES MOVE LEFT
-            if(lShapeATrue||lShapeBTrue||skewAtrue||skewBtrue||straightTrue||squareTrue||tShapeTrue)mp.move(w,"left");
-            
-        	graphics.repaint();
-        
         //ROTATE SELECTED SHAPE
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE ) {
         	System.out.println("SPACE pressed = ROTATE SHAPE");
@@ -313,17 +237,14 @@ public class Grid extends Thread implements KeyListener{
     @Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 	public void println(Object obj) {
 		System.out.println(obj);
 	}
-	
 	
 	//SPAWN NEW PICE RANDOMLY
 	public final int SHAPEAMOUNT = 7;
@@ -336,7 +257,6 @@ public class Grid extends Thread implements KeyListener{
 			previousShape = nextShape;
 			nextShape = (int)(Math.random()*SHAPEAMOUNT);
 		} while (nextShape == previousShape);
-
 	
 		if(nextShape == 0) {
 			lShapeATrue = lShapeBTrue = skewAtrue = skewBtrue = straightTrue = squareTrue = tShapeTrue = false;
@@ -369,7 +289,6 @@ public class Grid extends Thread implements KeyListener{
 		}
 	}
 	
-	
 	//CLEAR BOARD
 	public void clearGrid(World w) {
     	for(int y=0;y<GRIDHEIGHT;y++) {
@@ -381,7 +300,6 @@ public class Grid extends Thread implements KeyListener{
         }
     }
 	
-	
 	//AUTO MOVE PIECE DOWN BOUND TO "A"
 	public boolean autoDownTrue = false;
 	public boolean speedUpTrue = false;
@@ -391,15 +309,11 @@ public class Grid extends Thread implements KeyListener{
 			public void run() {
 				int count = 0;
 				while(autoDownTrue) {
-					
-
 					if(w.getAt(4, 0) == mp && !(mp.boundary(w, "down"))) {
 						autoDownTrue = false;
 						println("GAME OVER");
 						break;
 					}
-
-					
 		            try {
 					mp.move(w, "down");
 					println("auto moving piece down");
@@ -423,19 +337,5 @@ public class Grid extends Thread implements KeyListener{
 		};
 		autoDownThread.start();
 	}
-
-	//MAIN DRIVER CLASS
-	/*
-    public static void main(String[] args) {
-    	Grid GUI = new Grid();
-    	
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                    GUI.createGUI();
-            }
-        });       
-    }
-    */
 
 }
