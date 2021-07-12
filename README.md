@@ -12,20 +12,20 @@ Your can turn the speed increase off so that it stays the same speed the whole t
 
 # CONTROLS
 
-- h = show help menu
+h = show help menu
 
-- Enter or p = start/pause game
+Enter or p = start/pause game
 
-- Movements = Up Down Left Right Arrows
+Movements = Up Down Left Right Arrows
 
-- shift (left or right) = drop shape to bottom
+shift (left or right) = drop shape to bottom
 
-- Spacebar = rotate shape
+Spacebar = rotate shape
 
-- z = set shape in place
+z = set shape in place
 
-- s = showscores
+s = showscores
 
--r = reset
+r = reset
 
--f = toggle speed increase (default on)
+f = toggle speed increase (default on)
