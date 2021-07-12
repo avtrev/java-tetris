@@ -137,15 +137,15 @@ public class Grid extends Thread implements KeyListener{
 
     JLabel menuItems[] = new JLabel[] {
     		new JLabel("HELP MENU"),
-    		new JLabel("---------------------------------"),
-    		new JLabel("Start/Pause = Enter Or P "),
-    		new JLabel("Movement = Up Down Left Right Arrows"),
-			new JLabel("Drop Shape = Shift (Left Or Right)"),
-			new JLabel("Rotate Shape = Spacebar"),
-			new JLabel("Set Shape In Place = Z"),
-			new JLabel("Show Score = S"),
-			new JLabel("Toggle Speed Increase = F (Default On)"),
-			new JLabel("Show Help Menu= H"),
+    		new JLabel("Enter Or P = Start/Pause"),
+    		new JLabel("Up Down Left Right = Move Shape"),
+			new JLabel("Shift (Left Or Right) = Drop Shape To Bottom"),
+			new JLabel("Space = Rotate Shape"),
+			new JLabel("Z = Set Shape In Place"),
+			new JLabel("S = Show Score"),
+			new JLabel("R = Reset"),
+			new JLabel("F = Toggle Speed Increase (Default On)"),
+			new JLabel("H = Show Help Menu"),
     				};
     JPanel helpMenuPanel = new JPanel();
     
