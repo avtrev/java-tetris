@@ -11,12 +11,21 @@ You can pause the game and still move the shapes around, it will just not decend
 Your can turn the speed increase off so that it stays the same speed the whole time.
 
 # CONTROLS
--h = show help menu
--Enter or p = start/pause game
--Movements = Up Down Left Right Arrows
--shift (left or right) = drop shape to bottom
--Spacebar = rotate shape
--z = set shape in place
--s = showscores
+
+- h = show help menu
+
+- Enter or p = start/pause game
+
+- Movements = Up Down Left Right Arrows
+
+- shift (left or right) = drop shape to bottom
+
+- Spacebar = rotate shape
+
+- z = set shape in place
+
+- s = showscores
+
 -r = reset
+
 -f = toggle speed increase (default on)
