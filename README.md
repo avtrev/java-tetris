@@ -26,11 +26,11 @@ git clone https://github.com/avtrev/java-tetris.git .
 
 bash compile-tetris-jar.sh
 
-*the tetris.jar will start at the end of the script.*••
-*you can now start the tetris.jar with either*••
-bash start-tetris.sh••
-*or*••
-java -jar tetris.jar••
+*the tetris.jar will start at the end of the script.*  
+*you can now start the tetris.jar with either*  
+bash start-tetris.sh  
+*or*  
+java -jar tetris.jar  
 
 # Controls
 
