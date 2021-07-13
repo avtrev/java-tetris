@@ -16,19 +16,19 @@ If you know how to compile java files please disregard these instructions.
 I added a compile-tetris-jar.sh shell script that compiles everything to a tetris.jar file.
 Then bash script is for Linux and MacOs terminals. I will make a .bat script for Windows soon. If you know how to compile java files manually.
 
-mkdir java-tetris
+$ mkdir java-tetris
 
-cd java-tetris
+$ cd java-tetris
 
-git clone https://github.com/avtrev/java-tetris.git .
+$ git clone https://github.com/avtrev/java-tetris.git .
 
-bash compile-tetris-jar.sh
+$ bash compile-tetris-jar.sh
 
-# the tetris.jar will start at the end of the script.
-# you can now start the tetris.jar with either
-# bash start-tetris.sh
-# or
-# java -jar tetris.jar
+the tetris.jar will start at the end of the script.
+you can now start the tetris.jar with either
+$ bash start-tetris.sh
+or
+$ java -jar tetris.jar
 
 # Controls
 
